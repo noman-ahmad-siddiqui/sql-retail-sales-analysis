@@ -2,6 +2,7 @@
 
 ## Project Overview
 This project focuses on analyzing retail sales data using SQL Server.  
+
 The goal of the project was:
 - Database creation
 - CSV data import
@@ -107,7 +108,7 @@ SELECT COUNT(*)
 FROM retail_sales;
 ```
 
-### ✔ Checked duplicate transaction IDs
+### ✔ Checked data duplication
 
 ```sql
 SELECT transactions_id, COUNT(*)
@@ -173,7 +174,7 @@ WHERE
    OR cogs IS NULL
    OR total_sale IS NULL;
 ```
-
+![Null Values](screenshots/Null_values.png)
 ---
 # Data Cleaning
 
@@ -190,6 +191,7 @@ WHERE quantity IS NULL
    OR cogs IS NULL
    OR total_sale IS NULL;
 ```
+![Removing Null Values](screenshots/removing_null_values.png)
 
 ### ✔ Filled missing age values using average age
 
@@ -198,6 +200,7 @@ UPDATE retail_sales
 SET age = ( SELECT AVG(age) FROM retail_sales )
 WHERE age IS NULL;
 ```
+![Handling Null Values](screenshots/handling_null_age.png)
 
 ---
 # Exploratory Data Analysis (EDA)
@@ -251,7 +254,7 @@ FROM retail_sales
 GROUP BY category
 ORDER BY revenue DESC;
 ```
-
+![Category vs Revenue](screenshots/category_vs_revenue.png)
 ---
 
 ### 6. Which gender spends more?
@@ -262,7 +265,7 @@ FROM retail_sales
 GROUP BY gender
 ORDER BY total_spend DESC;
 ```
-
+![Spending by Gender](screenshots/spending_by_gender.png)
 ---
 
 ### 7. Which age group purchases the most?
@@ -293,7 +296,7 @@ GROUP BY
 
 ORDER BY total_sales DESC;
 ```
-
+![Purchase Comparison by Age Group](screenshots/age_group_purchases.png)
 ---
 
 ### 8. Best sales month
@@ -305,7 +308,7 @@ FROM retail_sales
 GROUP BY DATEPART(MONTH, sale_date)
 ORDER BY total_sales DESC;
 ```
-
+![Best Sales Month](screenshots/best_sales_month.png)
 ---
 
 ### 9. Morning vs Afternoon vs Evening sales
@@ -329,7 +332,7 @@ GROUP BY
         ELSE 'Evening'
     END;
 ```
-
+![Shift Sales Comparison](screenshots/shift_sales_comparison.png)
 ---
 
 ### 10. Top 5 customers by spending
@@ -342,7 +345,7 @@ FROM retail_sales
 GROUP BY customer_id
 ORDER BY total_spend DESC;
 ```
-
+![Top 5 Customers](screenshots/top_5_customers.png)
 ---
 
 ### 11. Average order value per category
@@ -369,7 +372,7 @@ SELECT category,
 FROM retail_sales
 GROUP BY category;
 ```
-
+![Category Rank By Revenue](screenshots/ranking_categories_by_revenue.png)
 ---
 
 # SQL Concepts Used
@@ -391,9 +394,8 @@ GROUP BY category;
 
 # Key Insights
 
-- Certain categories generated significantly more revenue than others.
-- Adult customers contributed the highest sales volume.
-- Afternoon sales periods contained the largest number of transactions.
+- Female customers spent more than male customers.
+- Evening sales periods contained the largest number of transactions.
 - Sales trends varied across different months.
 - Revenue ranking helped identify top-performing categories.
 
@@ -402,12 +404,12 @@ GROUP BY category;
 # Project Structure
 
 ```text
-Retail-Sales-SQL-Project/
+sql-retail-sales-analysis/
 │
-├── dataset/
 ├── screenshots/
-├── sql_queries.sql
-└── README.md
+├── README.md
+├── retail_sales.csv
+└── retail_sales.sql
 ```
 
 ---
@@ -417,7 +419,6 @@ Retail-Sales-SQL-Project/
 - Build Power BI dashboard
 - Perform Python EDA
 - Add advanced SQL queries
-- Create automated reporting workflow
 
 ---
 
